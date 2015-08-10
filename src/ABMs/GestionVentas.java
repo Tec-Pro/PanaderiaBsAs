@@ -70,7 +70,7 @@ private int idVenta;
         Base.close();
         return false;
     }
-    
+
     
     public boolean cargarArticulosVentas(LinkedList<Triple> listaArticulos){
         abrirBase();
@@ -78,6 +78,12 @@ private int idVenta;
         boolean result = true;
         for(Triple t: listaArticulos){
             ArticulosVentas articulosVentas = ArticulosVentas.create("venta_id", idVenta, "articulo_id", t.getIdArticulo(), "cantidad_articulo", t.getCantidad(), "monto_articulo", t.getPrecioFinal());
+            Articulo a = Articulo.first("id = ?", t.getIdArticulo());
+            if(a != null){
+                BigDecimal nuevo = a.getBigDecimal("stock").subtract(t.getCantidad());
+                a.set("stock",nuevo);
+                result = result && a.saveIt();
+            }
             result = result && articulosVentas.saveIt();
         }
         Base.commitTransaction();
