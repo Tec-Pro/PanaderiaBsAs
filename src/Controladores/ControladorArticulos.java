@@ -61,18 +61,7 @@ public class ControladorArticulos implements ActionListener {
 
         });
 
-        articulosGui.getPorcentajeCheckbox().addItemListener(new ItemListener() {
-
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() != ItemEvent.SELECTED) {
-                    articulosGui.getTxtPrecio().setEditable(true);
-                } else {
-                    articulosGui.getTxtPrecio().setEditable(false);
-                    articulosGui.getTxtPrecio().setText(ParserFloat.floatToString(calcularPrecio()));
-                }
-            }
-        });
+        
 
         articulosGui.getBoxTipo().addActionListener(new ActionListener() {
             @Override
@@ -95,24 +84,13 @@ public class ControladorArticulos implements ActionListener {
 
         });
 
-        articulosGui.getTxtPrecioCompra().addKeyListener(new KeyAdapter() {
-
-            @Override
-            public void keyReleased(KeyEvent evt) {
-                if (articulosGui.getPorcentajeCheckbox().isSelected()) {
-                    articulosGui.getTxtPrecio().setText(ParserFloat.floatToString(calcularPrecio()));
-                }
-            }
-        }
-        );
-
     }
 
     private float calcularPrecio() {
-        String txtPrecioCompra = articulosGui.getTxtPrecioCompra().getText();
+        String txtPrecioCompra = articulosGui.getTxtPrecioCompra().getText().trim();
         float precio_compra = 0.0f;
-        if (!txtPrecioCompra.trim().isEmpty()) {
-            precio_compra = ParserFloat.stringToFloat(articulosGui.getTxtPrecioCompra().getText().trim());
+        if (!txtPrecioCompra.isEmpty()) {
+            precio_compra = ParserFloat.stringToFloat(txtPrecioCompra);
         }
         return (precio_compra + (precio_compra * ControladorPrincipal.getPorcentajeRecargo() / 100));
     }
@@ -260,6 +238,8 @@ public class ControladorArticulos implements ActionListener {
             String codigo = (String) articulosGui.getTablaArticulosDefault().getValueAt(row, 0);
             articulosGui.setImagen(null);
             gestionArticulos.deleteProductImage(codigo, "jpg");
+        } else if (e.getActionCommand().equals("PORCENTAJE")){
+            articulosGui.getTxtPrecio().setText(ParserFloat.floatToString(calcularPrecio()));
         }
     }
 

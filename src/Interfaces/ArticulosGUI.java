@@ -31,7 +31,7 @@ public class ArticulosGUI extends javax.swing.JInternalFrame {
     }
 
     public void limpiarPantalla() {
-        porcentajeCheckbox.setSelected(true);
+
         txtNombre.setText("");
         txtCodigo.setText("");
         txtDescripcion.setText("");
@@ -45,7 +45,7 @@ public class ArticulosGUI extends javax.swing.JInternalFrame {
 
     public void habilitarGuardarCancelar() {
         habilitarCampos();
-        porcentajeCheckbox.setEnabled(true);
+        btnPorcentaje.setEnabled(true);
         btnEliminar.setEnabled(true);
         btnModificar.setEnabled(false);
         btnNuevo.setText("Guardar");
@@ -54,15 +54,16 @@ public class ArticulosGUI extends javax.swing.JInternalFrame {
         btnEliminar.setActionCommand("CANCELAR");
     }
 
-    public void limpiarPanelImagenProducto(){
+    public void limpiarPanelImagenProducto() {
         pnlImagenProducto.setIcon(null);
         pnlImagenProducto.revalidate();
     }
+
     public void habilitarNuevo() {
         limpiarPantalla();
         btnNuevo.setText("Nuevo");
         btnNuevo.setActionCommand("NUEVO");
-        porcentajeCheckbox.setEnabled(false);
+        btnPorcentaje.setEnabled(false);
         btnModificar.setEnabled(false);
         btnEliminar.setText("Eliminar");
         btnEliminar.setActionCommand("ELIMINAR");
@@ -108,6 +109,7 @@ public class ArticulosGUI extends javax.swing.JInternalFrame {
         btnNuevo.addActionListener(ac);
         btnModificar.addActionListener(ac);
         btnEliminar.addActionListener(ac);
+        btnPorcentaje.addActionListener(ac);
         getBtnCargarImagen().addActionListener(ac);
         getBtnEliminarImagen().addActionListener(ac);
     }
@@ -187,7 +189,7 @@ public class ArticulosGUI extends javax.swing.JInternalFrame {
         txtStockMinimo = new javax.swing.JFormattedTextField();
         txtPrecioCompr = new javax.swing.JFormattedTextField();
         jLabel10 = new javax.swing.JLabel();
-        porcentajeCheckbox = new javax.swing.JCheckBox();
+        btnPorcentaje = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -288,15 +290,14 @@ public class ArticulosGUI extends javax.swing.JInternalFrame {
         txtStockMinimo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtStockMinimo.setToolTipText("Stock mínimo del producto");
 
-        txtPrecioCompr.setEditable(false);
         txtPrecioCompr.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Precio (kg - un)");
 
-        porcentajeCheckbox.setSelected(true);
-        porcentajeCheckbox.setText("Aplicar porcentaje");
-        porcentajeCheckbox.setEnabled(false);
+        btnPorcentaje.setText("Porcentaje");
+        btnPorcentaje.setActionCommand("PORCENTAJE");
+        btnPorcentaje.setEnabled(false);
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
@@ -321,31 +322,32 @@ public class ArticulosGUI extends javax.swing.JInternalFrame {
                 .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelImage1Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                         .addGap(48, 48, 48)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
                     .addGroup(panelImage1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2)
-                            .addComponent(pnlImagenProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                            .addComponent(pnlImagenProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
                             .addComponent(txtStockMinimo)
                             .addComponent(txtStock)
                             .addGroup(panelImage1Layout.createSequentialGroup()
-                                .addComponent(porcentajeCheckbox)
+                                .addGap(3, 3, 3)
+                                .addComponent(btnPorcentaje)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPrecioCompr, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
+                                .addComponent(txtPrecioCompr))
                             .addComponent(txtPrecioCompra)
                             .addComponent(txtNombre)
                             .addComponent(txtCodigo)
                             .addComponent(boxTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelImage1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBuscador, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
+                        .addComponent(txtBuscador, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
                 .addGap(15, 15, 15))
         );
         panelImage1Layout.setVerticalGroup(
@@ -378,8 +380,9 @@ public class ArticulosGUI extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPrecioCompr)
-                            .addComponent(porcentajeCheckbox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnPorcentaje)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtStock)
@@ -433,6 +436,7 @@ public class ArticulosGUI extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEliminarImagen;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnPorcentaje;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -447,7 +451,6 @@ public class ArticulosGUI extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private org.edisoncor.gui.panel.PanelImage panelImage1;
     private org.edisoncor.gui.panel.PanelImage pnlImagenProducto;
-    private javax.swing.JCheckBox porcentajeCheckbox;
     private javax.swing.JTable tablaArticulos;
     private javax.swing.JTextField txtBuscador;
     private javax.swing.JTextField txtCodigo;
@@ -588,7 +591,7 @@ public class ArticulosGUI extends javax.swing.JInternalFrame {
     /**
      * @return the porcentajeCheckbox
      */
-    public javax.swing.JCheckBox getPorcentajeCheckbox() {
-        return porcentajeCheckbox;
+    public javax.swing.JButton getBtnPorcentaje() {
+        return btnPorcentaje;
     }
 }

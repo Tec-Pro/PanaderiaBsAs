@@ -66,21 +66,22 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                          <Component id="btnModificar" pref="86" max="32767" attributes="0"/>
+                          <Component id="btnModificar" pref="90" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="btnEliminar" pref="80" max="32767" attributes="0"/>
+                          <Component id="btnEliminar" pref="84" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jScrollPane2" max="32767" attributes="0"/>
-                              <Component id="pnlImagenProducto" alignment="0" pref="253" max="32767" attributes="0"/>
+                              <Component id="pnlImagenProducto" alignment="0" pref="261" max="32767" attributes="0"/>
                               <Component id="txtStockMinimo" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtStock" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="porcentajeCheckbox" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtPrecioCompr" pref="111" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                  <Component id="btnPorcentaje" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtPrecioCompr" max="32767" attributes="0"/>
                               </Group>
                               <Component id="txtPrecioCompra" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
@@ -89,14 +90,14 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtBuscador" pref="244" max="32767" attributes="0"/>
+                          <Component id="txtBuscador" pref="236" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane1" pref="298" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="290" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
@@ -138,8 +139,10 @@
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txtPrecioCompr" max="32767" attributes="0"/>
-                              <Component id="porcentajeCheckbox" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel10" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="btnPorcentaje" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -432,7 +435,6 @@
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtPrecioCompr">
           <Properties>
-            <Property name="editable" type="boolean" value="false"/>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
               <Format format="#0.00" subtype="-1" type="0"/>
             </Property>
@@ -446,10 +448,10 @@
             <Property name="text" type="java.lang.String" value="Precio (kg - un)"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="porcentajeCheckbox">
+        <Component class="javax.swing.JButton" name="btnPorcentaje">
           <Properties>
-            <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Aplicar porcentaje"/>
+            <Property name="text" type="java.lang.String" value="Porcentaje"/>
+            <Property name="actionCommand" type="java.lang.String" value="PORCENTAJE"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
