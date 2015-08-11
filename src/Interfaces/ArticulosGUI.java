@@ -160,7 +160,7 @@ public class ArticulosGUI extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelImage1 = new org.edisoncor.gui.panel.PanelImage();
+        panelImage1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaArticulos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -449,7 +449,7 @@ public class ArticulosGUI extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private org.edisoncor.gui.panel.PanelImage panelImage1;
+    private javax.swing.JPanel panelImage1;
     private org.edisoncor.gui.panel.PanelImage pnlImagenProducto;
     private javax.swing.JTable tablaArticulos;
     private javax.swing.JTextField txtBuscador;
