@@ -6,7 +6,6 @@
 package Controladores;
 
 import ABMs.GestionArticulos;
-import Interfaces.AplicacionGUI;
 import Interfaces.ArticulosGUI;
 import Interfaces.ProductosEscasosGUI;
 import Modelos.Articulo;
@@ -14,6 +13,8 @@ import Utils.ImageFilter;
 import Utils.ParserFloat;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -59,15 +60,29 @@ public class ControladorArticulos implements ActionListener {
             }
 
         });
-        
+
+        articulosGui.getPorcentajeCheckbox().addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() != ItemEvent.SELECTED) {
+                    articulosGui.getTxtPrecio().setEditable(true);
+                } else {
+                    articulosGui.getTxtPrecio().setEditable(false);
+                    articulosGui.getTxtPrecio().setText(ParserFloat.floatToString(calcularPrecio()));
+                }
+            }
+        });
+
         articulosGui.getBoxTipo().addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                if(articulosGui.getBoxTipo().getSelectedItem() == "PESABLE"){
+                if (articulosGui.getBoxTipo().getSelectedItem() == "PESABLE") {
                     articulosGui.getTxtCodigo().setText("Codigo autogenerado");
                     articulosGui.getTxtCodigo().setEnabled(false);
-                }else{
-                   articulosGui.getTxtCodigo().setText("");
-                   articulosGui.getTxtCodigo().setEnabled(true); 
+                } else {
+                    articulosGui.getTxtCodigo().setText("");
+                    articulosGui.getTxtCodigo().setEnabled(true);
                 }
             }
         });
@@ -84,17 +99,22 @@ public class ControladorArticulos implements ActionListener {
 
             @Override
             public void keyReleased(KeyEvent evt) {
-                String txtPrecioCompra = articulosGui.getTxtPrecioCompra().getText();
-                float precio_compra = 0.0f;
-                if (!txtPrecioCompra.trim().isEmpty()) {
-                    precio_compra = ParserFloat.stringToFloat(articulosGui.getTxtPrecioCompra().getText().trim());
+                if (articulosGui.getPorcentajeCheckbox().isSelected()) {
+                    articulosGui.getTxtPrecio().setText(ParserFloat.floatToString(calcularPrecio()));
                 }
-                float precio = (precio_compra + (precio_compra * ControladorPrincipal.getPorcentajeRecargo() / 100));
-                articulosGui.getTxtPrecio().setText(ParserFloat.floatToString(precio));
             }
         }
         );
 
+    }
+
+    private float calcularPrecio() {
+        String txtPrecioCompra = articulosGui.getTxtPrecioCompra().getText();
+        float precio_compra = 0.0f;
+        if (!txtPrecioCompra.trim().isEmpty()) {
+            precio_compra = ParserFloat.stringToFloat(articulosGui.getTxtPrecioCompra().getText().trim());
+        }
+        return (precio_compra + (precio_compra * ControladorPrincipal.getPorcentajeRecargo() / 100));
     }
 
     private void cargarDatosElementoSeleccionado() {
@@ -260,6 +280,10 @@ public class ControladorArticulos implements ActionListener {
         Base.close();
     }
 
+    public void recargarListaArticulos() {
+        cargarListaArt();
+    }
+
     private void cargarListaArt() {
         LazyList<Articulo> arts = gestionArticulos.listarArticulos();
         abrirBase();
@@ -280,18 +304,18 @@ public class ControladorArticulos implements ActionListener {
     }
 
     private boolean datosOk() {
-        if(articulosGui.getBoxTipo().getSelectedItem() == "PESABLE"){
+        if (articulosGui.getBoxTipo().getSelectedItem() == "PESABLE") {
             return (!articulosGui.getTxtCodigo().getText().equals("")
-                && !articulosGui.getTxtPrecioCompra().getText().equals("")
-                && !articulosGui.getTxtNombre().getText().equals(""));
-        }else{
+                    && !articulosGui.getTxtPrecioCompra().getText().equals("")
+                    && !articulosGui.getTxtNombre().getText().equals(""));
+        } else {
             return (!articulosGui.getTxtCodigo().getText().equals("")
-                && !(articulosGui.getTxtCodigo().getText().length() < 5)
-                && !articulosGui.getTxtPrecioCompra().getText().equals("")
-                && !articulosGui.getTxtNombre().getText().equals("")
-                && !articulosGui.getBoxTipo().getSelectedItem().equals("Seleccionar"));
+                    && !(articulosGui.getTxtCodigo().getText().length() < 5)
+                    && !articulosGui.getTxtPrecioCompra().getText().equals("")
+                    && !articulosGui.getTxtNombre().getText().equals("")
+                    && !articulosGui.getBoxTipo().getSelectedItem().equals("Seleccionar"));
         }
-        
+
     }
 
     public void abrirBase() {

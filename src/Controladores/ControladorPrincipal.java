@@ -42,6 +42,8 @@ public class ControladorPrincipal implements ActionListener {
     CargarVentasGUI cargarVentaGUI;
     VentasGUI ventasGUI;
     GestionBackupBD gestionBackup;
+    ControladorArticulos controladorArticulos;
+
     private final ArticulosGUI articulosGUI;
     private static float porcentajeRecargo;
     private static GeneralConfig config;
@@ -76,7 +78,7 @@ public class ControladorPrincipal implements ActionListener {
         controladorCargarVentas = new ControladorCargarVentas(cargarVentaGUI, controladorVentas);
 
         articulosGUI = new ArticulosGUI();
-        ControladorArticulos controladorArticulos = new ControladorArticulos(articulosGUI);
+        controladorArticulos = new ControladorArticulos(articulosGUI);
 
         productosEscasosGui = new ProductosEscasosGUI();
 
@@ -110,17 +112,17 @@ public class ControladorPrincipal implements ActionListener {
     public static void main(String[] args) throws Exception {
         abrirBase();
         Demo d = Demo.first("id = ?", 2);
-         if(Calendar.getInstance().getTime().before(d.getDate("fecha"))){
+        if (Calendar.getInstance().getTime().before(d.getDate("fecha"))) {
 
-        ControladorPrincipal aplicacion = new ControladorPrincipal();
-        //Integer resp = JOptionPane.showConfirmDialog(aplicacionGUI, "¿La balanza esta conectada?", "Atencion", JOptionPane.YES_NO_OPTION);
-        //if (resp == JOptionPane.YES_OPTION) {
-         //   balanza = 1;
-        //    System.out.println(balanza);
-       // }
-        }else{
-           JOptionPane.showMessageDialog(null, "Se acabo el tiempo para la version de prueba.", "Error", JOptionPane.INFORMATION_MESSAGE);
-           System.exit(0);
+            ControladorPrincipal aplicacion = new ControladorPrincipal();
+            Integer resp = JOptionPane.showConfirmDialog(aplicacionGUI, "¿La balanza esta conectada?", "Atencion", JOptionPane.YES_NO_OPTION);
+            if (resp == JOptionPane.YES_OPTION) {
+                balanza = 1;
+                System.out.println(balanza);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Se acabo el tiempo para la version de prueba.", "Error", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
         }
 
     }
@@ -136,6 +138,7 @@ public class ControladorPrincipal implements ActionListener {
             ventasGUI.setVisible(true);
         }
         if (e.getSource().equals(aplicacionGUI.getBtnArticulos())) {
+            controladorArticulos.recargarListaArticulos();
             articulosGUI.setVisible(true);
         }
         if (e.getSource() == aplicacionGUI.getCrearBackup()) {
